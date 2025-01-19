@@ -7085,7 +7085,6 @@ const customStyling = document.createElement("style");
 document.head.appendChild(customStyling);
 
 
-campaignTrail_temp.cyoa = true
 var Conservatve_Points = 0;
 var Gibs_right = 0; 
 var Gibs_wrong = 0; 
@@ -7093,7 +7092,12 @@ var dropout = 0;
 var Klar_Win = 0; 
 var Disregard_Gibs = 0;
 var Had_a_Good_Time = 0;
+var John_Klar = 0;
+var Jim_Sexton = 0;
+var Art_Peaterson = 0;
+var Nobody = 0;
 // The Big Men mad at Scotts antics
+campaignTrail_temp.cyoa = true
 cyoAdventure = function (a){
 ans = campaignTrail_temp.player_answers[campaignTrail_temp.player_answers.length - 1]
 //Gibs cyoa/Education Deal cyoa
@@ -7106,8 +7110,6 @@ campaignTrail_temp.questions_json[6] =  {
             "description": "Negotiations with legislative Democrats on the state’s education finances have finally borne fruit. Major bipartisan reforms to the education financing system are on the way, including much of Representative Scott Beck’s ideas on homestead and non-homestead taxes and pupil weighting, as well as Representative Emilie Kornheiser’s measures to tax short-term rentals and limit the powers of local voters. Your signature of the yield bill is a celebration of bipartisanship. Gibbs approaches you after the signing.\n",
             "likelihood": 1
         }
-       
-
 }
 campaignTrail_temp.questions_json[14] =  {
     
@@ -7120,7 +7122,7 @@ campaignTrail_temp.questions_json[14] =  {
         }
     
     
-    }
+}
 }
 if (ans == 5184) {
 unlockAchievement("Governor Gibbs");  
@@ -7232,15 +7234,63 @@ if (ans == 5226) {
 console.log("dropout")
 Klar_Win += 1; 
 }
+if (ans == 5231) {
+Nobody += 1; 
+}
+if (ans == 5232) {
+Nobody += 1; 
+}
+if (ans == 5233) {
+Nobody += 1; 
+}
+if (ans == 5234) {
+Nobody += 1; 
+}
+if (ans == 5235) {
+Jim_Sexton += 1; 
+}
+if (ans == 5236) {
+Jim_Sexton += 1; 
+}
+if (ans == 21365) {
+Jim_Sexton += 1; 
+}
+if (ans == 5212) {
+Art_Peaterson += 1; 
+}
+if (ans == 5213) {
+Art_Peaterson += 1; 
+}
+if (ans == 5214) {
+Art_Peaterson += 1; 
+}
+if (ans == 5224) {
+John_Klar += 1; 
+}
+if (ans == 5225) {
+John_Klar += 1; 
+}
+if (ans == 5226) {
+John_Klar += 1; 
+}
 //Advisor Pic change
 if (ans == 2130623232191) {
 updateAdvisorImage(20, "https://i.imgur.com/uMZwfap.png");   
 Disregard_Gibs += 1;
 }
-
-
-if (Conservatve_Points >= 4) {
-unlockAchievement("Rally Behind the Governor");   
+if (Nobody == 1) {
+unlockAchievement("Rally Behind the Governor"); 
+}
+if (Jim_Sexton == 1) {
+unlockAchievement("Crazy Jim");  
+}
+if (Art_Peaterson == 1) {
+unlockAchievement("Big Art");  
+}
+if (John_Klar == 1) {
+unlockAchievement("Traitor");
+}
+if (Conservatve_Points >= 4) {  
 campaignTrail_temp.questions_json[12] =  {
 "model": "campaign_trail.question",
         "pk": 1068,
@@ -7252,7 +7302,6 @@ campaignTrail_temp.questions_json[12] =  {
     }
 }
 if (Conservatve_Points == 2||Conservatve_Points == 3) {
-unlockAchievement("Crazy Jim");  
 campaignTrail_temp.questions_json[12] =  {
 "model": "campaign_trail.question",
         "pk": 1069,
@@ -7263,8 +7312,7 @@ campaignTrail_temp.questions_json[12] =  {
         }
     }
 }
-if (Conservatve_Points >= -5 && Conservatve_Points <= 1 ) {
-unlockAchievement("Big Art");  
+if (Conservatve_Points >= -5 && Conservatve_Points <= 1) {
 campaignTrail_temp.questions_json[12] =  {
 "model": "campaign_trail.question",
         "pk": 1063,
@@ -7279,8 +7327,7 @@ updateCandidateName(202, "Kevin", "Hoyt");
 campaignTrail_temp.candidate_json[3]["fields"].color_hex = "#F5F5DC";
 }
 //Klar
-if (Conservatve_Points <= -5){  
-unlockAchievement("Traitor");  
+if (Conservatve_Points <= -5){    
 campaignTrail_temp.questions_json[12] = {
 "model": "campaign_trail.question",
             "pk": 1066,
@@ -7376,13 +7423,10 @@ campaignTrail_temp.questions_json[24] =  {
 if (ans == 5200) { 
 unlockAchievement("Country Over Party");  
 }
-if(21524) {
+if(ans == 21524) {
 unlockAchievement("Woke and Proud");    
 }
-
-
 }
-
 //exchange two existing answers, default also their effects
 // example call: answerSwapper (8325, 8549, true)
 function answerSwapper(pk1, pk2, takeEffects = true) {
@@ -7548,13 +7592,9 @@ function changeIssueEffect(answer, issue, changeScore, changeImportance) {
     campaignTrail_temp.answer_score_issue_json.push(newEntry);
   }
 }
-
-//ENDINGS
-
 // Campaign Trail configuration
 campaignTrail_temp.multiple_endings = true;
 //ENDINGS
-
 
 // Campaign Trail configuration
 campaignTrail_temp.multiple_endings = true;
@@ -7675,7 +7715,7 @@ construct = (a = 1) => {
     e.header = "<h1> something went wonjg</h1>";
     e.pages = ["<p>huh.</p>"];
     e.page = 0;
-  
+
     endingPicker = (out, totv, aa, quickstats) => {
       e.final_overall_results.sort((a, b) => b.popular_votes - a.popular_votes);
       //out = "win", "loss", or "tie" for your candidate
@@ -7691,6 +7731,7 @@ construct = (a = 1) => {
       e.pages = []
       e.header = "";
       e.executable = []
+      var id = aa.map(f=>f.candidate).indexOf(202)
   
       if (quickstats[1] > 60 && dropout == 0 && Klar_Win == 0) { // Scott Landslide
         unlockAchievement("King Phil");  
@@ -7722,7 +7763,7 @@ construct = (a = 1) => {
                   <p><i>Ending I of VIII</i></p>
                 </div>`)
                   autoHalveVolumeOnce(setMusic("https://audio.jukehost.co.uk/zLXUGGGeWwQ6dN72i8y87MrrVRLnC3NT"));
-      //e.image = ""
+      //e.image = "" 
       e.executable.push([0, (() => {e.image = e.image = 'https://i.imgur.com/wYxaRjC.png'})])
       e.executable.push([1, (() => {e.image = e.image = 'https://i.imgur.com/mnrCG0s.png'})])
       e.executable.push([2, (() => {e.image = e.image = 'https://i.imgur.com/B7XMc58.png'})])
@@ -7792,7 +7833,45 @@ construct = (a = 1) => {
       e.executable.push([0, (() => {e.image = e.image = 'https://i.imgur.com/YZe1AEe.png'})])
       e.executable.push([1, (() => {e.image = e.image = 'https://i.imgur.com/9elVvyY.png'})])
       e.executable.push([2, (() => {e.image = e.image = 'https://i.imgur.com/tdVCnhr.png'})])
-      } else if (campaignTrail_temp.candidate_json[3]["fields"].last_name == "Klar" && aa[0].candidate == 200) { // Scott wins despite Klar running indi
+      } else if (aa[id].electoral_votes >= 0 && campaignTrail_temp.candidate_json[3]["fields"].last_name == "Klar" && aa[0].candidate == 200) { // Scott wins despite Klar running indi
+        unlockAchievement("Still Standing");  
+        unlockAchievement("Klar Country");  
+      e.pages.push(`
+                  <p>You come at the King, you best not miss. But John Klar didn’t get the message. This isn’t his Republican Party, not in Vermont. This is Phil Scott’s Republican Party. This is what you think as you watch the results come in from Barre. The rebels have been routed, with Klar trailing, trailing, trailing into irrelevancy. Your honorable opponent, Governor Dean? He lost too, and unlike Klar he called you with a gracious concession. Gibbs is nowhere to be found in Barre, but you could care less, he was wrong about everything.</p>
+                  <p>You knew the fringe would come out against you when you raised the “treacherous” banner of compromise and moderation. So when John Klar organized his doomed tax revolt, you weren’t surprised. But you took that risk when you sat down with the Democrats to hammer out a compromise on education taxes. Because developing a real policy solution to real problems was worth it. Because that’s what real mavericks do. With your approach, you’ve actually bridged the partisan divide and brought people together towards a moderate consensus that truly does grow the economy, make Vermont more affordable, and yes, protect the most vulnerable.</p>
+                  <p>When the dust settles on election night, it seems like Donald Trump, the Monster, will again be President. But you’re ready, ready to defend Vermont. Ready to make a stand for the Republican Party of your father Howard, a World War Two veteran and a truly decent man. In the Green Mountain State, the Party of Lincoln is not yet lost. Phil Baruth and Jill Krowinski call you on Thursday to discuss the agenda for the coming legislative session, ready to craft a bipartisan agenda for the benefit of all. Vermont has its defender, and his name is Phillip Brian Scott.</p>
+                  `)
+                  e.pages.push(`
+                  <h2><b>VTDigger - Jason Gibbs, Chief of Staff to Governor, to resign</b></h2>
+                  <p>January 4th, 2025</p>
+                  <p>Jason Gibbs, who has served as Chief of Staff to Governor Phil Scott since 2017, has resigned from his position effective immediately, citing a “respectful difference of perspective” with Governor Scott, while wishing the Governor and his team “whom I respect immensely” the best going forward.</p>
+                  <p>Jason Gibbs has been known for his combative personality, prodigious intelligence, small government ideas, and willingness to directly and sharply respond to critics of the Governor, many in Montpelier have cited the “abrasive” Chief of Staff’s attitude as one of the reasons for rocky relations between the Governor and the legislature. </p>
+                  <p>Governor Scott wished Gibbs the best, thanking him for 8 years of “diligent and thoughtful” service. </p>
+                  <p>Sources in Montpelier indicated that the Governor and his Chief of Staff broke significantly on legislative strategy during the 2024 legislative session, and that Gibbs strongly opposed Governor Scott’s education compromise with Democrats during the session. Subsequently, Gibbs took a backseat in decision-making on the Fifth Floor. </p>
+                  <p>Scott previously characterized the relationship between the two as, "we don't agree on everything. We have our own debates. But in the end, I win, you know, because I'm governor — and that's the way it is." The Governor seemingly did have his way in this case.</p>
+                  <p>Democratic leaders have yet to comment but anonymous Democratic sources indicated their pleasure at the news. Governor Scott has indicated he plans to renew bipartisan talks to see what compromises can be reached with reconciling affordability and emissions goals.</p>
+                  `)
+                  e.pages.push(`
+                  <p><u>FOR IMMEDIATE RELEASE - Independent Republican Party formed</u></p>
+                  <p>August 19th, 2025</p>
+                  <p>We the people of Vermont have been betrayed by our elected representatives too many times to stay silent. Phil Scott looked us in the eye and told us he would not raise our taxes. But he did, and that wasn’t the only promise he broke. There has been a pattern of disrespect and disregard exhibited by the Governor for his entire term of office. He has refused to vote for our Republican nominees for President, or support our statewide Republican slate. So, we conservative Vermont Republicans have resolved to fight back. Today we form the Independent Republican Party.</p>
+                  <p>We are Republicans, we support our President, Donald Trump, and we support limited government, law and order, and traditional Christian values. What we are not are Phil Scott R.I.N.O. 's (Republican in Name Only) who push liberal policy and ask Republican voters to accept crumbs, and call them ungrateful when they demand better. We’re at risk of losing our state, and we demand that our leaders do more to stop Vermont’s transformation into New Jersey. We don’t want Phil Scott, who is about as conservative as fellow R.I.N.O. Mitt Romney, we want conservative leadership like Donald Trump, Elon Musk, and J.D. Vance. </p>
+                  <p>We will chiefly run candidates in Republican primaries to get conservatives elected. What we want is a unified conservative Republican Party. If things change, we will happily rejoin our party, the party of Reagan and Trump. But like the Green Mountain Boys, we aren’t afraid of a little rebellion, and so we won’t hesitate to run candidates outside of Republican primaries if we’re disrespected.</p>
+                  <p>This is for the people of Vermont.</p>
+                  <p>Cordially Signed,</p>
+                  <p><i>John Klar</i></p>
+                  <p><i>Gregory Thayer</i></p>
+                  <p><i>Mike Tagliavia</i></p>
+                  <p><i>Samantha Lefebvre</i></p>
+                  <p><i>Andrea Murray</i></p>
+                  <p><i>Ending IV of VIII</i></p>
+                  `)
+                  autoHalveVolumeOnce(setMusic("https://audio.jukehost.co.uk/VDWczSDmQHBq0Tk64TE5L5dFCutIfFtC"));
+      //e.image = ""
+      e.executable.push([0, (() => {e.image = e.image = 'https://i.imgur.com/DTgmbYJ.png'})])
+      e.executable.push([1, (() => {e.image = e.image = 'https://i.imgur.com/0kF6CME.png'})])
+      e.executable.push([2, (() => {e.image = e.image = 'https://i.imgur.com/03TytDs.png'})])
+      }  else if (campaignTrail_temp.candidate_json[3]["fields"].last_name == "Klar" && aa[0].candidate == 200) { // Scott wins despite Klar running indi
         unlockAchievement("Still Standing");    
       e.pages.push(`
                   <p>You come at the King, you best not miss. But John Klar didn’t get the message. This isn’t his Republican Party, not in Vermont. This is Phil Scott’s Republican Party. This is what you think as you watch the results come in from Barre. The rebels have been routed, with Klar trailing, trailing, trailing into irrelevancy. Your honorable opponent, Governor Dean? He lost too, and unlike Klar he called you with a gracious concession. Gibbs is nowhere to be found in Barre, but you could care less, he was wrong about everything.</p>
@@ -7830,9 +7909,7 @@ construct = (a = 1) => {
       e.executable.push([1, (() => {e.image = e.image = 'https://i.imgur.com/0kF6CME.png'})])
       e.executable.push([2, (() => {e.image = e.image = 'https://i.imgur.com/03TytDs.png'})])
       } 
-      
-      
-    //Defeat Endings
+      //Defeat Endings
 else if (aa[0].candidate != 200 && campaignTrail_temp.candidate_json[3]["fields"].last_name != "Klar" && dropout == 0 && Klar_Win == 0) { // Loose without Klar
       e.pages.push(`
                   <p>You crack open a coke and kick back. Your staffers chat amongst one another as the clock ticks down towards poll closing. The mood at your Barre election night event is the most tense it ever has been, but you’re not worried. Your ego isn’t riding on this vote. Worst case scenario you have to go back to doing what you love, walking big dogs and racing fast cars.</p>
@@ -7865,7 +7942,43 @@ else if (aa[0].candidate != 200 && campaignTrail_temp.candidate_json[3]["fields"
       e.executable.push([1, (() => {e.image = e.image = 'https://i.imgur.com/Smxs5KV.png'})])
       e.executable.push([2, (() => {e.image = e.image = 'https://i.imgur.com/Czauzpq.png'})])
       
-  } else if (aa[0].candidate != 200 && campaignTrail_temp.candidate_json[3]["fields"].last_name == "Klar") { // Loose with Klar
+  } else if (aa[id].electoral_votes >= 0 && (aa[0].candidate != 200 && campaignTrail_temp.candidate_json[3]["fields"].last_name == "Klar")) { // Loose with Klar
+    unlockAchievement("That’s Life");
+    unlockAchievement("Klar Country");      
+      e.pages.push(`
+                  <p>You crack open a coke and kick back. Your staffers chat amongst one another as the clock ticks down towards poll closing. The mood at your Barre election night event is the most tense it ever has been. Even you're worried, bouncing your knee and tapping the table. If you lose, it’s more than just politics, it’ll be a statement that partisanship and grandstanding is more important than getting things done.</p>
+                  <p>As the night proceeds, you witness your fears be slowly realized. The pit in your stomach grows. Dean is in the lead, and John Klar’s right-wing revolt is slicing into your vote share. You hold out hope for remaining vote batches from Washington County to save you, but it’s not enough. John Klar has stolen your base out from under you. It’s almost 11, the reality of defeat setting in, when you suggest calling Dean. You and your closest staffers are sitting around recounting old campaign stories, your staffers and friends, some of whom have been with you for 10 years or more, meekly accept. You call up Howard, he’s gracious, as are you. You concede, you wish him the best. After brief, gracious remarks to your disappointed supporters, you’re in bed not long after.</p>
+                  <p>The next morning, you wake up early to take the dogs for a walk. Neighbors walking dogs say hi, the air is cool, the dead leaves crunch under your feet. Vermont is still the same as yesterday. You’ve got more than a few unanswered texts and calls to respond to but you’re not terribly anxious about responding. Perhaps it’s even Gibbs, telling you all that you did wrong.</p>
+                  <p>Compromise and pragmatism may have lost today, you knew you took a risk when you sat down with the Democrats to negotiate a deal on education taxes, but it will not lose in the end. You can only hope that your efforts helped build a Vermont where ordinary working-class folks, people like your father Howard, can afford to live and build a family and enjoy the blessings of the Green Mountain State.</p>
+                  `)
+      e.pages.push(`<h2><b>Vermont Public Radio - 2026 Debate Series</b></h2>
+                    <h2><b>Debate for Governor: Howard Dean & Mike Tagliavia, September 28th, 2026</b></h2>
+                  <p>Howard Dean: …so that’s why we’ve put so much emphasis on early childhood education. We’re building the foundations for growth in the future. The first few years of childhood development are so crucial, crucial for everything. Universal Pre-K is worth every cent, because we’re investing in our future. </p>
+                  <p>Mike Tagliavia: See this is the problem with big government liberals like you Howard. Spend, spend, spend, tax, tax, tax. Where does the money go? That’s not your money, that’s our money, it belongs to us.</p>
+                  <p>Howard Dean: Well I just said where it goes.</p>
+                  <p>Mike Tagliavia: And by the way Howard, what’s being taught in government pre-K? That’s right, woke propaganda. They’re teaching gender, critical race theory. They’re not learning math and science, they’re learning about homosexual intercourse.</p>
+                  <p>Howard Dean: That’s just not true, in fact that’s really insulting to our educators.</p>
+                  <p>Mikaela Lefrak: Let’s get back on track-</p>
+                  <p>Mike Tagliavia: Why are you even running? You were Governor ages ago. You’re most famous for screaming at people.</p>
+                  <p>Howard Dean: Yeah when you lived in Maryland.</p>
+                `)
+      e.pages.push(`
+                <p><u>FOR IMMEDIATE RELEASE - ¡Ocasio! 2032 Unveils “Republicans for Alexandria”</u></p>
+                <p>August 25th, 2032</p>
+                <p>Millions of people across this country are coming together to support Alexandria Ocasio-Cortez’s bid for President of the United States, regardless of party or background. Because this is about our country, not partisan differences.</p>
+                <p>“Republicans for Alexandria” is a coalition of Republicans who support a government for, of, and by the people, and not for special interests or political extremists. They see how the Republican Party has lost its way. You don’t have to agree with Alexandria on everything, but this isn’t about that, it’s about the people of the United States.</p>
+                <p>Former Governor Phil Scott of Vermont (2017-2025) agrees; “I don’t agree with Senator Cortez on much, but this is bigger than that. President Trump has shown a dangerous disrespect for our democratic institutions, and in many ways is even more demogaugic and uncivil than his father. We can do better, I know this because Alexandria reached out to me to talk about the issues, even if we didn’t agree. That takes leadership.”</p>
+                <p>This courageous group also includes former Nebraska State Senator John S. McCollister and former Pennsylvania Congressman Charlie Dent. </p>
+                <p><i>Ending VI of VIII</i></p>
+                  `)
+  
+                  autoHalveVolumeOnce(setMusic("https://audio.jukehost.co.uk/7oLyYtxcOII1HPdHuUDF1kYIIGgX5SI5"));
+      //e.image = ""
+      e.executable.push([0, (() => {e.image = e.image = 'https://i.imgur.com/4Z78e6U.png'})])
+      e.executable.push([1, (() => {e.image = e.image = 'https://i.imgur.com/pHmqJV8.png'})])
+      e.executable.push([2, (() => {e.image = e.image = 'https://i.imgur.com/zZm7ndQ.png'})])
+      //Loose nom/do not run endings
+      } else if (aa[0].candidate != 200 && campaignTrail_temp.candidate_json[3]["fields"].last_name == "Klar") { // Loose with Klar
     unlockAchievement("That’s Life");    
       e.pages.push(`
                   <p>You crack open a coke and kick back. Your staffers chat amongst one another as the clock ticks down towards poll closing. The mood at your Barre election night event is the most tense it ever has been. Even you're worried, bouncing your knee and tapping the table. If you lose, it’s more than just politics, it’ll be a statement that partisanship and grandstanding is more important than getting things done.</p>
